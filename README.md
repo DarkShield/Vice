@@ -1,4 +1,4 @@
 Vice
 ====
 
-ViceTech
+Vice is awesome!

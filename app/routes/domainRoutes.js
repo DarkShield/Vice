@@ -1,5 +1,7 @@
 var express = require('express'),
    mongoose = require('mongoose'),
+   userM = require('../model/user'),
+   fs = require('fs'),
    reqModel = require('../../lib/requestSchema');
 
 
@@ -9,6 +11,33 @@ var express = require('express'),
 	//TODO how to query for a list of sites
 	var dbQuery = reqModel.find( { '$or': [ { 'headers.host':   }, {   } ] }, function (err, docs){res.send(docs);} );
 }*/
+
+exports.getAuth = getAuth;
+
+function getAuth(req, res){
+	console.log(req.param('username')+' & '+req.param('password'));
+	userM.getAuthenticated(req.param('username'), req.param('password'), function(err, user, reason){
+		if (user !== null) {
+			req.session.user = user;
+			res.sendfile('../static/html/dashboard.html');
+
+			/*fs.readFile('../static/html/dashboard.html', function(err, content) {
+				if (err){
+					res.status(404);
+				}
+				else {
+					res.status(200);
+				}
+			}*/
+		}
+		else {
+			console.log('user: '+user);
+			console.log('error: '+err);
+			console.log('reason: '+reason);
+		}
+	});	
+}
+
 
 exports.getDomains = getDomains; 
 

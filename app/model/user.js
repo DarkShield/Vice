@@ -22,6 +22,11 @@ UserSchema.virtual('isLocked').get(function() {
     return !!(this.lockUntil && this.lockUntil > Date.now());
 });
 
+mongoose.connect('10.192.198.253', 'accounts', function(err){
+	if (err) throw err;
+	console.log('Successfully connected to mongo');
+});
+
 UserSchema.pre('save', function(next) {
     var user = this;
 

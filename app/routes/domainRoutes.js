@@ -4,7 +4,7 @@ var express = require('express'),
 
 
 //exports.getUsersDomains = getUsersDomains;
-
+//
 /*function getUsersDomains(req, res){
 	//TODO how to query for a list of sites
 	var dbQuery = reqModel.find( { '$or': [ { 'headers.host':   }, {   } ] }, function (err, docs){res.send(docs);} );

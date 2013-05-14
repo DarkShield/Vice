@@ -3,12 +3,12 @@ var express = require('express'),
    reqModel = require('../../lib/requestSchema');
 
 
-exports.getUsersDomains = getUsersDomains;
-
-function getUsersDomains(req, res){
+//exports.getUsersDomains = getUsersDomains;
+//
+/*function getUsersDomains(req, res){
 	//TODO how to query for a list of sites
 	var dbQuery = reqModel.find( { '$or': [ { 'headers.host':   }, {   } ] }, function (err, docs){res.send(docs);} );
-}
+}*/
 
 exports.getDomains = getDomains; 
 

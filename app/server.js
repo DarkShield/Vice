@@ -8,18 +8,9 @@ app.use(express.static(__dirname + '/static'));
 app.use(express.bodyParser());
 
 //routes
-app.get('/domains', function (req, res) {
-	'use strict';
-	domainRoutes.getDomains(req, res);
-});
+app.get('/domains', domainRoutes.getDomains);
 
-app.post('/domains/info', function (req, res) {
-    'use strict';
-    domainRoutes.drillDown(req, res);
-});
-app.post('/domains/attacks', function (req, res) {
-   'use strict';
-   domainRoutes.getAttacks(req, res);
-});
+app.post('/domains/info', domainRoutes.drillDown);
+app.post('/domains/attacks', domainRoutes.getAttacks);
 
 module.exports = app;

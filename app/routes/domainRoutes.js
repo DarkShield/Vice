@@ -1,5 +1,4 @@
-var express = require('express'),
-   mongoose = require('mongoose'),
+var mongoose = require('mongoose'),
    reqModel = require('../../lib/requestSchema');
 
 

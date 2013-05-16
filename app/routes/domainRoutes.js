@@ -1,5 +1,4 @@
-var mongoose = require('mongoose'),
-   reqModel = require('../../lib/requestSchema');
+var reqModel = require('../../lib/requestSchema');
 
 
 //exports.getUsersDomains = getUsersDomains;

@@ -8,6 +8,7 @@ App.factory('domainService', ['$http', function($http){
 
       getDomains: function(){
         $http.get('/domains').success(function(body){
+		//domains.doms = body;
 		for (var domain in body){
 			domains.doms.push(body[domain]);
 		}	

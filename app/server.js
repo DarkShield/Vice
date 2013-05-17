@@ -22,7 +22,7 @@ app.post('/dashboard', function (req, res) {
 
 app.get('/assets', domainRoutes.IsAuthenticated, function(req, res, next){
 	'use strict';
-	res.redirect('/assets/dashboard.html');
+	res.sendfile('./assets/dashboard.html');
 });
 
 module.exports = app;

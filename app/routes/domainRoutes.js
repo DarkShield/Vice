@@ -12,11 +12,11 @@ var fs = require('fs'),
 exports.getAuth = getAuth;
 
 function getAuth(req, res){
-	console.log(req.param('username')+' & '+req.param('password'));
 	userM.getAuthenticated(req.param('username'), req.param('password'), function(err, user, reason){
 		if (user !== null) {
 			req.session.user = user;
-			res.sendfile('./assets/dashboard.html');
+			res.redirect('/assets');
+			//res.sendfile('./assets/dashboard.html');
 
 			/*fs.readFile('./static/html/dashboard.html', function(err, content) {
 				if (err){
@@ -41,7 +41,6 @@ exports.IsAuthenticated = IsAuthenticated;
 
 function IsAuthenticated(req, res, next){
 	if(req.session.user){
-		console.log('next thing');
 		next();
 	}else{
 		next(new Error(401));
@@ -51,14 +50,15 @@ function IsAuthenticated(req, res, next){
 exports.getDomains = getDomains; 
 
 function getDomains(req, res){
-   var uniques = reqModel.distinct('headers.host',{},function(err, docs){
+   /*var uniques = reqModel.distinct('headers.host',{},function(err, docs){
       var resdocs = [];
       for (var i = 0; i <= docs.length; i++){
          var domObj = {name: docs[i]};
          resdocs.push(domObj);
       }
       res.send(resdocs);
-   });
+   });*/
+	res.send(req.session.user.sites);
 }
 
 exports.drillDown = drillDown;

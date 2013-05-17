@@ -1,9 +1,5 @@
-var express = require('express'),
-   mongoose = require('mongoose'),
-   userM = require('../model/user'),
-   fs = require('fs'),
-   reqModel = require('../../lib/requestSchema');
-
+var fs = require('fs'),
+var reqModel = require('../../lib/requestSchema');
 
 //exports.getUsersDomains = getUsersDomains;
 //

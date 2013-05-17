@@ -3,17 +3,17 @@ var domainRoutes = require('./routes/domainRoutes');
 var app = express();
 var mongoose = require('mongoose');
 
-//app.configure(function() {
-	app.use(express.cookieParser());
-	app.use(express.bodyParser());
-	app.use(express.session({ secret: 'SuperSecretKeyForNow' }));
-	app.use(express.static(__dirname + '/static'));
-//});
+//middleware order matters
+app.use(express.static(__dirname + '/static'));
+app.use(express.bodyParser());
+app.use(express.cookieParser());
+app.use(express.session({ secret: 'SuperSecretKeyForNow' }));
 
-app.get('/domains', function (req, res) {
-	'use strict';
-	domainRoutes.getDomains(req, res);
-});
+//routes
+app.get('/domains', domainRoutes.getDomains);
+
+app.post('/domains/info', domainRoutes.drillDown);
+app.post('/domains/attacks', domainRoutes.getAttacks);
 
 app.post('/dashboard', function (req, res) {
 	'use strict';
@@ -31,3 +31,5 @@ app.post('/domains/attacks', function (req, res) {
 
 mongoose.connect('10.192.198.253', 'vicetest');
 app.listen(1337);
+
+module.exports = app;

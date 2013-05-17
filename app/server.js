@@ -28,8 +28,8 @@ app.post('/domains/attacks', function (req, res) {
    'use strict';
    domainRoutes.getAttacks(req, res);
 });
-
+/*
 mongoose.connect('10.192.198.253', 'vicetest');
 app.listen(1337);
-
+*/
 module.exports = app;

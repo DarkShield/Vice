@@ -1,5 +1,6 @@
 var fs = require('fs'),
-var reqModel = require('../../lib/requestSchema');
+    userM = require('../model/user'),
+    reqModel = require('../../lib/requestSchema');
 
 //exports.getUsersDomains = getUsersDomains;
 //

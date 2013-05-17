@@ -19,16 +19,18 @@ function getAuth(req, res){
 	userM.getAuthenticated(req.param('username'), req.param('password'), function(err, user, reason){
 		if (user !== null) {
 			req.session.user = user;
-			res.sendfile('../static/html/dashboard.html');
+			res.sendfile('./static/html/dashboard.html');
 
-			/*fs.readFile('../static/html/dashboard.html', function(err, content) {
+			/*fs.readFile('./static/html/dashboard.html', function(err, content) {
 				if (err){
 					res.status(404);
+					console.log(err);
 				}
 				else {
 					res.status(200);
+					console.log('success');
 				}
-			}*/
+			});*/
 		}
 		else {
 			console.log('user: '+user);

@@ -1,6 +1,7 @@
 var express = require('express');
 var domainRoutes = require('./routes/domainRoutes');
 var app = express();
+var mongoose = require('mongoose');
 
 //app.configure(function() {
 	app.use(express.cookieParser());
@@ -27,4 +28,6 @@ app.post('/domains/attacks', function (req, res) {
    'use strict';
    domainRoutes.getAttacks(req, res);
 });
+
+mongoose.connect('10.192.198.253', 'vicetest');
 app.listen(1337);

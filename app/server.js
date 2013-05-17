@@ -20,16 +20,9 @@ app.post('/dashboard', function (req, res) {
 	domainRoutes.getAuth(req, res);
 });
 
-app.post('/domains/info', function (req, res) {
-    'use strict';
-    domainRoutes.drillDown(req, res);
+app.get('/assets', domainRoutes.IsAuthenticated, function(req, res, next){
+	'use strict';
+	res.redirect('/assets/dashboard.html');
 });
-app.post('/domains/attacks', function (req, res) {
-   'use strict';
-   domainRoutes.getAttacks(req, res);
-});
-/*
-mongoose.connect('10.192.198.253', 'vicetest');
-app.listen(1337);
-*/
+
 module.exports = app;

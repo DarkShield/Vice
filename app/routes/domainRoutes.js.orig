@@ -1,6 +1,13 @@
-var fs = require('fs'),
-    userM = require('../model/user'),
-    reqModel = require('../../lib/requestSchema');
+<<<<<<< HEAD
+var express = require('express'),
+   mongoose = require('mongoose'),
+   userM = require('../model/user'),
+   fs = require('fs'),
+   reqModel = require('../../lib/requestSchema');
+=======
+var reqModel = require('../../lib/requestSchema');
+>>>>>>> master
+
 
 //exports.getUsersDomains = getUsersDomains;
 //
@@ -16,7 +23,7 @@ function getAuth(req, res){
 	userM.getAuthenticated(req.param('username'), req.param('password'), function(err, user, reason){
 		if (user !== null) {
 			req.session.user = user;
-			res.sendfile('./assets/dashboard.html');
+			res.sendfile('./static/html/dashboard.html');
 
 			/*fs.readFile('./static/html/dashboard.html', function(err, content) {
 				if (err){
@@ -37,16 +44,6 @@ function getAuth(req, res){
 	});	
 }
 
-exports.IsAuthenticated = IsAuthenticated;
-
-function IsAuthenticated(req, res, next){
-	if(req.session.user){
-		console.log('next thing');
-		next();
-	}else{
-		next(new Error(401));
-	}
-}
 
 exports.getDomains = getDomains; 
 

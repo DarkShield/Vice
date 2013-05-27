@@ -5,6 +5,9 @@ var server,
     request = require('request'),
     port = 8080,
     verbos = true;
+var mongoose = require('mongoose');
+mongoose.connect('10.192.198.253', 'vicetest');
+
 
 vows.describe('Proxy').addBatch({
     'when proxyserver is required':{

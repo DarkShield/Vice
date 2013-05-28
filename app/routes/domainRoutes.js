@@ -16,7 +16,7 @@ function getAuth(req, res){
 	userM.getAuthenticated(req.param('username'), req.param('password'), function(err, user, reason){
 		if (user !== null) {
 			req.session.user = user;
-			res.sendfile('./static/html/dashboard.html');
+			res.sendfile('./routes/html/dashboard.html');
 
 			/*fs.readFile('./static/html/dashboard.html', function(err, content) {
 				if (err){

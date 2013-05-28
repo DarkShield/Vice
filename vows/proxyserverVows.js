@@ -6,7 +6,7 @@ var server,
     port = 8080,
     verbos = true;
 var mongoose = require('mongoose');
-mongoose.connect('10.192.198.253', 'vicetest');
+mongoose.connect('localhost', 'vicetest');
 
 
 vows.describe('Proxy').addBatch({

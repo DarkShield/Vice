@@ -2,7 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 
 var app = express();
-var Routes = require('./routes/domainRoutes');
+var Routes = require('./routes/router');
 
 //middleware order matters
 app.use(express.static(__dirname + '/static'));

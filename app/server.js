@@ -1,7 +1,8 @@
 var express = require('express');
-var domainRoutes = require('./routes/domainRoutes');
-var app = express();
 var mongoose = require('mongoose');
+
+var app = express();
+var Routes = require('./routes/domainRoutes');
 
 //middleware order matters
 app.use(express.static(__dirname + '/static'));
@@ -10,11 +11,11 @@ app.use(express.cookieParser());
 app.use(express.session({ secret: 'SuperSecretKeyForNow' }));
 
 //routes
-app.get('/domains', domainRoutes.getDomains);
+app.get('/domains', Routes.domains);
 
 
-app.post('/dashboard', domainRoutes.getAuth);
-app.post('/domains/info', domainRoutes.drillDown);
-app.post('/domains/attacks', domainRoutes.getAttacks);
+app.post('/dashboard', Routes.dashboard);
+app.post('/domains/info', Routes.domains.info);
+app.post('/domains/attacks', Routes.domains.attacks);
 
 module.exports = app;

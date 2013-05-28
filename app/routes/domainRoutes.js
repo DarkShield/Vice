@@ -9,7 +9,7 @@ var fs = require('fs'),
 	var dbQuery = reqModel.find( { '$or': [ { 'headers.host':   }, {   } ] }, function (err, docs){res.send(docs);} );
 }*/
 
-exports.getAuth = getAuth;
+exports.dashboard = getAuth;
 
 function getAuth(req, res){
 	console.log(req.param('username')+' & '+req.param('password'));
@@ -38,7 +38,7 @@ function getAuth(req, res){
 }
 
 
-exports.getDomains = getDomains; 
+exports.domains = getDomains; 
 
 function getDomains(req, res){
    var uniques = reqModel.distinct('headers.host',{},function(err, docs){
@@ -51,7 +51,7 @@ function getDomains(req, res){
    });
 }
 
-exports.drillDown = drillDown;
+exports.domains.info = drillDown;
 
 function drillDown(req, res){
    var domainName = req.body.name;
@@ -60,7 +60,7 @@ function drillDown(req, res){
    //res.send(dbReqs);
 }
 
-exports.getAttacks = getAttacks;
+exports.domains.attacks = getAttacks;
 function getAttacks(req, res){
    var domainName = req.body.name;
    var dbQuery = reqModel.find({'headers.host': domainName, 'attack': 'true'}, function (err, docs){res.send(docs);});

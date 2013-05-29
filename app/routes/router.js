@@ -7,8 +7,8 @@ exports.loginpage = function loginpage (req, res) {
 
 
 exports.login = function authenticate (req, res) {
-  var username = req.param('username');
-  var password = req.param('password');
+  var username = req.body.username;
+  var password = req.body.password;
   var respond = function (err, user, reason) {
     if (user !==null){
       req.session.user = user;

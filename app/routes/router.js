@@ -1,15 +1,12 @@
-var fs = require('fs'),
-    userM = require('../model/user'),
-    reqModel = require('../../lib/requestSchema');
+var User = require('../model/user'),
+    RequestStore = require('../../lib/requestSchema');
 
-exports.login = function (req, res) {
+exports.loginpage = function loginpage (req, res) {
   res.sendfile('./public/html/login.html');
 }
 
 
-exports.dashboard = getAuth;
-
-function getAuth(req, res){
+exports.login = function authenticate (req, res) {
   var username = req.param('username');
   var password = req.param('password');
   var respond = function (err, user, reason) {
@@ -20,14 +17,12 @@ function getAuth(req, res){
       res.redirect('/login?' + reason + '&' + err );
     }
   }
-  userM.getAuthenticated(username, password, respond);
+  User.getAuthenticated(username, password, respond);
 }
 
 
-exports.domains = getDomains; 
-
-function getDomains(req, res){
-   var uniques = reqModel.distinct('headers.host',{},function(err, docs){
+exports.domains = function getDomains(req, res){
+   RequestStore.distinct('headers.host',{},function(err, docs){
       var resdocs = [];
       for (var i = 0; i <= docs.length; i++){
          var domObj = {name: docs[i]};
@@ -37,17 +32,18 @@ function getDomains(req, res){
    });
 }
 
-exports.domains.info = drillDown;
-
-function drillDown(req, res){
+exports.domains.info = function getDomainData (req, res){
    var domainName = req.body.name;
-   //console.log(domainName);
-   var dbQuery = reqModel.find({'headers.host': domainName}, function (err, docs){res.send(docs);});
-   //res.send(dbReqs);
+   var respond = function (err, docs){
+     res.send(docs);
+   }
+   RequestStore.find({'headers.host': domainName}, respond);
 }
 
-exports.domains.attacks = getAttacks;
-function getAttacks(req, res){
+exports.domains.attacks = function getDomainAttacks(req, res){
    var domainName = req.body.name;
-   var dbQuery = reqModel.find({'headers.host': domainName, 'attack': 'true'}, function (err, docs){res.send(docs);});
+   var respond = function (err, docs) {
+     res.send(docs);
+   }
+   RequestStore.find({'headers.host': domainName, 'attack': 'true'},respond);
 }

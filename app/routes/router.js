@@ -8,6 +8,10 @@ var fs = require('fs'),
 	//TODO how to query for a list of sites
 	var dbQuery = reqModel.find( { '$or': [ { 'headers.host':   }, {   } ] }, function (err, docs){res.send(docs);} );
 }*/
+exports.login = function (req, res) {
+  res.sendfile('./public/html/login.html');
+}
+
 
 exports.dashboard = getAuth;
 

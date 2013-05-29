@@ -12,7 +12,7 @@ app.use(express.session({ secret: 'SuperSecretKeyForNow' }));
 
 //routes
 app.get('/domains', Routes.domains);
-
+app.get('/login', Routes.login);
 
 app.post('/dashboard', Routes.dashboard);
 app.post('/domains/info', Routes.domains.info);

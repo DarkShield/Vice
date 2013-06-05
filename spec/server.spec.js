@@ -41,14 +41,24 @@ describe("app", function(){
     expect(app.routes.get[0].path).toBe('/domains');
     expect(app.routes.get[0].callbacks[0].name).toBe('getDomains');
   });
-
-  it("should have a POST route to /domains/info that calls the drillDown function", function(){
-    expect(app.routes.post[0].path).toBe('/domains/info');
-    expect(app.routes.post[0].callbacks[0].name).toBe('drillDown');
+  
+  it("should have a GET route to  /login that calls the loginpage function", function(){
+    expect(app.routes.get[1].path).toBe('/login');
+    expect(app.routes.get[1].callbacks[0].name).toBe('loginpage');
   });
 
-  it("should have a POST route to /domains/attacks that calls the getAttacks function", function(){
-    expect(app.routes.post[1].path).toBe('/domains/attacks');
-    expect(app.routes.post[1].callbacks[0].name).toBe('getAttacks');
+  it("should have a POST route to /login that calls the authenticate function", function(){
+    expect(app.routes.post[0].path).toBe('/login');
+    expect(app.routes.post[0].callbacks[0].name).toBe('authenticate');
+  });
+
+  it("should have a POST route to /domains/info that calls the getDomainData function", function(){
+    expect(app.routes.post[1].path).toBe('/domains/info');
+    expect(app.routes.post[1].callbacks[0].name).toBe('getDomainData');
+  });
+
+  it("should have a POST route to /domains/attacks that calls the getDomainAttacks function", function(){
+    expect(app.routes.post[2].path).toBe('/domains/attacks');
+    expect(app.routes.post[2].callbacks[0].name).toBe('getDomainAttacks');
   });
 });

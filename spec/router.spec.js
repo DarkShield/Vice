@@ -6,9 +6,23 @@ describe('routes', function(){
     expect(typeof(routes)).toBe('object');
   });
 
-  it('should have a loginpage property that references a method named loginpage', function(){
-    expect(typeof(routes.loginpage)).toBe('function');
-    expect(routes.loginpage.name).toBe('loginpage');
+  describe('loginpage route', function(){
+
+    it('should have a loginpage property that references a method named loginpage', function(){
+      expect(typeof(routes.loginpage)).toBe('function');
+      expect(routes.loginpage.name).toBe('loginpage');
+    });
+
+    it('should call sendFile with argument "./public/html/login.html"', function(){
+      var req = {};
+      var res = {
+            sendfile: function(req, res){}
+          };
+      spyOn(res, 'sendfile');
+      routes.loginpage(req, res);
+      expect(res.sendfile).toHaveBeenCalled();
+      expect(res.sendfile).toHaveBeenCalledWith('./public/html/login.html');
+    }); 
   });
 
   it('should have a login property that references a method named authenticate', function(){
@@ -30,4 +44,5 @@ describe('routes', function(){
     expect(typeof(routes.domains.attacks)).toBe('function');
     expect(routes.domains.attacks.name).toBe('getDomainAttacks');
   });
+
 });

@@ -14,7 +14,8 @@ exports.login = function authenticate (req, res) {
       req.session.user = user;
       res.sendfile('./routes/html/dashboard.html');
     } else {
-      res.redirect('/login?' + reason + '&' + err );
+      req.session.user = {'reason':reason, 'error':err};
+      res.redirect('/login');
     }
   }
   User.getAuthenticated(username, password, respond);
@@ -22,14 +23,7 @@ exports.login = function authenticate (req, res) {
 
 
 exports.domains = function getDomains(req, res){
-   RequestStore.distinct('headers.host',{},function(err, docs){
-      var resdocs = [];
-      for (var i = 0; i <= docs.length; i++){
-         var domObj = {name: docs[i]};
-         resdocs.push(domObj);
-      }
-      res.send(resdocs);
-   });
+  res.send(req.session.user.sites);
 }
 
 exports.domains.info = function getDomainData (req, res){

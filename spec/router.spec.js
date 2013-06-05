@@ -113,14 +113,64 @@ describe('routes', function(){
     });
   });
 
-  it('should have a domains.info property that references a method named getDomainData', function(){
-    expect(typeof(routes.domains.info)).toBe('function');
-    expect(routes.domains.info.name).toBe('getDomainData');
+  //nested describe for domain.info route
+  describe('domains.info route', function(){
+
+    it('should have a domains.info property that references a method named getDomainData', function(){
+      expect(typeof(routes.domains.info)).toBe('function');
+      expect(routes.domains.info.name).toBe('getDomainData');
+    });
+
+    it('should call send with argument docs', function(){
+      var req = {
+            body: { name: 'test.com'  }
+          };
+      var res = {
+            send: function(req, res){ done = true; }
+          };
+      var done = false;
+      spyOn(res, 'send').andCallThrough();
+      runs(function(){
+        routes.domains.info(req, res);
+      });
+      waitsFor(function() {
+        return done;
+      }, 'Send to be called', 750);
+      runs(function(){
+        expect(res.send).toHaveBeenCalled();
+        expect(typeof(res.send.mostRecentCall.args[0])).toBe('object');
+      });
+    });
+
   });
 
-  it('should have a domains.attacks property that references a mehtod named getDomainAttacks', function(){
-    expect(typeof(routes.domains.attacks)).toBe('function');
-    expect(routes.domains.attacks.name).toBe('getDomainAttacks');
-  });
+  //nested describe for domain.attacks route
+  describe('domains.attacks route', function() {
 
+    it('should have a domains.attacks property that references a mehtod named getDomainAttacks', function(){
+      expect(typeof(routes.domains.attacks)).toBe('function');
+      expect(routes.domains.attacks.name).toBe('getDomainAttacks');
+    });
+
+    it('should call send with argument docs', function(){
+      var req = {
+            body: { name: 'test.com'  }
+          };
+      var res = {
+            send: function(req, res){ done = true; }
+          };
+      var done = false;
+      spyOn(res, 'send').andCallThrough();
+      runs(function(){
+        routes.domains.info(req, res);
+      });
+      waitsFor(function() {
+        return done;
+      }, 'Send to be called', 750);
+      runs(function(){
+        expect(res.send).toHaveBeenCalled();
+        expect(typeof(res.send.mostRecentCall.args[0])).toBe('object');
+      });
+    });
+  });
 });
